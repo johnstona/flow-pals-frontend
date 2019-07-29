@@ -1,15 +1,18 @@
-import React from 'react';
+import React from 'react'
 
-class Login extends React.Component {
+class Signup extends React.Component {
   state = {
+    name: '',
     username: '',
-    password: ''
+    password: '',
+    confirmPassword: ''
   }
 
   validateForm() {
     return (
       this.state.username.length > 0 &&
-      this.state.password.length > 0
+      this.state.password.length > 0 &&
+      this.state.password === this.state.confirmPassword
     );
   }
 
@@ -21,16 +24,24 @@ class Login extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.login(this.state)
+    this.props.newUser(this.state)
     this.setState({
+      name: '',
       username: '',
-      password: ''
+      password: '',
+      confirmPassword: ''
     })
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
+          <input
+            type="text"
+            value={this.state.name}
+            onChange={this.handleChange}
+            name="name"
+          />
           <input
             type="text"
             value={this.state.username}
@@ -43,12 +54,18 @@ class Login extends React.Component {
             type="password"
             name="password"
           />
+          <input
+            value={this.state.confirmPassword}
+            onChange={this.handleChange}
+            type="password"
+            name="confirmPassword"
+          />
         <button
           block
           bsSize="large"
           disabled={!this.validateForm()}
           type="submit"
-        >Log In</button>
+        >Sign Up </button>
       </form>
     );
   }
@@ -56,4 +73,4 @@ class Login extends React.Component {
 
 }
 
-export default Login
+export default Signup
