@@ -15,7 +15,7 @@ const getAllProjects = () => {
     .then(resp => resp.json())
 }
 
-const getAllUsers = () => {
+export const getAllUsers = () => {
   return fetch(USERS_URL)
     .then(resp => resp.json())
 }
@@ -56,4 +56,8 @@ const createCollaborator = (user_id, project_id) => {
       project_id: project_id
     })
   }).then(resp => resp.json())
+}
+
+export default {
+  getAllUsers
 }
