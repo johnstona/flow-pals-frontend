@@ -10,7 +10,7 @@ const token = localStorage.getItem('token')
 const Home = ({ login , projects, collaborators }) => {
   return (
     token
-    ? <UserPage projects={ projects }/>
+    ? <UserPage projects={ projects } collaborators={ collaborators }/>
     : <Login login={ login }/>
   )
 }
