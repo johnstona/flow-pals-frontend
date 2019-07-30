@@ -1,18 +1,16 @@
-import React from 'react'
+import React from 'react';
+import API from '../adapters/API';
 
-class Signup extends React.Component {
+class Login extends React.Component {
   state = {
-    name: '',
     username: '',
     password: '',
-    confirmPassword: ''
   }
 
   validateForm() {
     return (
       this.state.username.length > 0 &&
-      this.state.password.length > 0 &&
-      this.state.password === this.state.confirmPassword
+      this.state.password.length > 0
     );
   }
 
@@ -24,30 +22,18 @@ class Signup extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    this.props.newUser(this.state)
+    this.props.login(this.state)
     this.setState({
-      name: '',
       username: '',
-      password: '',
-      confirmPassword: ''
+      password: ''
     })
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-          <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
+        <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
           <div className="mb-4">
-          <div className="mb-4">
-            <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">
-              Name
-            </label>
-            <input className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" type="text"
-            value={this.state.name}
-            onChange={this.handleChange}
-            name="name"
-            placeholder="Name"/>
-          </div>
             <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">
               Username
             </label>
@@ -66,28 +52,18 @@ class Signup extends React.Component {
             type="password"
             name="password" placeholder="******************"/>
           </div>
-          <div className="mb-6">
-            <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="password">
-              Confirm Password
-            </label>
-            <input className="shadow rounded w-full py-2 px-3 text-grey-darker mb-3" value={this.state.confirmPassword}
-            onChange={this.handleChange}
-            type="password"
-            name="confirmPassword" placeholder="******************"/>
-          </div>
           <div className="flex items-center justify-between">
               <button className="bg-blue hover:bg-blue-dark text-black font-bold py-2 px-4 rounded"
-              disabled={!this.validateForm()}
               type="submit">
-              Sign Up
+              Sign In
               </button>
           </div>
         </div>
       </form>
-    );
+    ); 
   }
 
 
 }
 
-export default Signup
+export default Login
