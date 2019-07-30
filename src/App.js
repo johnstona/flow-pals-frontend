@@ -6,18 +6,8 @@ import API from './adapters/API'
 import Signup from './components/Signup'
 import Login from './components/Login'
 
-<<<<<<< HEAD
-const App = () => {
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Header />
-      </BrowserRouter>
-    </div>
-  );
-=======
 class App extends React.Component {
-  
+
   componentDidMount () {
 
     API.createSubscription()
@@ -44,7 +34,6 @@ class App extends React.Component {
       </div>
     )
   }
->>>>>>> daf810b721b76839c076840c193d318322214dbe
 }
 
 export default App
