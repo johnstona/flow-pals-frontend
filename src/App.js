@@ -28,6 +28,8 @@ class App extends React.Component {
         <BrowserRouter>
           <>
           <Header />
+          <Route path='/signup' component={Signup} />
+          <Route path='/login' component={Login} />
           </>
         </BrowserRouter>
       </div>
