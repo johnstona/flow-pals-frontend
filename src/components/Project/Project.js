@@ -1,7 +1,7 @@
-import React from 'react';
-import './Project.css';
+import React from 'react'
+import './Project.css'
 
-const container = ({ children }) => {
+const Project = ({ children }) => {
   return (
     <div className="project-container">
       <div class="project">
@@ -10,3 +10,5 @@ const container = ({ children }) => {
     </div>
   )
 }
+
+export default Project
