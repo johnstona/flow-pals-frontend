@@ -26,9 +26,12 @@ class App extends React.Component {
     return (
       <div className='App'>
         <BrowserRouter>
+          <>
           <Header />
-          <Signup newUser={this.newUser}/>
-          <Login login={this.loginUser}/>
+          <Route exact path='/' component={App} />
+          <Route exact path='/signup' render={Signup} />
+          <Route exact path='/login' render={Login} />
+          </>
         </BrowserRouter>
       </div>
     )
