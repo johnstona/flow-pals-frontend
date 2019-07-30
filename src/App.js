@@ -9,7 +9,7 @@ import Login from './components/Login'
 class App extends React.Component {
   componentDidMount () {
 
-    // API.createSubscription()
+    API.createSubscription()
   }
 
   newUser = (user) => {

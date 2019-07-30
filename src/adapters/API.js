@@ -1,15 +1,17 @@
-// const ACTION_CABLE = ActionCable.createConsumer('ws://localhost:3000/cable')
+import ActionCable from 'actioncable'
+
+const ACTION_CABLE = ActionCable.createConsumer('ws://localhost:3000/cable')
 const BASE_URL = 'http://localhost:3000'
 const USERS_URL = `${BASE_URL}/users`
 const PROJECTS_URL = `${BASE_URL}/projects`
 const COLLABORATORS_URL = `${BASE_URL}/collaborators`
 const LOGIN_URL = `${BASE_URL}/login`
 
-// const createSubscription = () => {
-//   ACTION_CABLE.subscriptions.create('ProjegitctChannel', {
-//     received: data => { console.log(data) }
-//   })
-// }
+const createSubscription = () => {
+  ACTION_CABLE.subscriptions.create('ProjectChannel', {
+    received: data => { console.log(data) }
+  })
+}
 
 const getAllProjects = () => {
   return fetch(PROJECTS_URL)
@@ -83,5 +85,6 @@ const createCollaborator = (user_id, project_id) => {
 export default {
   getAllUsers,
   createUser,
-  login
+  login,
+  createSubscription
 }
