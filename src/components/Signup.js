@@ -36,36 +36,53 @@ class Signup extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
+          <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
+          <div className="mb-4">
+          <div className="mb-4">
+            <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">
+              Name
+            </label>
+            <input className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" type="text"
             value={this.state.name}
             onChange={this.handleChange}
             name="name"
-          />
-          <input
-            type="text"
+            placeholder="Name"/>
+          </div>
+            <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="username">
+              Username
+            </label>
+            <input className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" type="text"
             value={this.state.username}
             onChange={this.handleChange}
             name="username"
-          />
-           <input
-            value={this.state.password}
+            placeholder="Username"/>
+          </div>
+          <div className="mb-6">
+            <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="password">
+              Password
+            </label>
+            <input className="shadow rounded w-full py-2 px-3 text-grey-darker mb-3" value={this.state.password}
             onChange={this.handleChange}
             type="password"
-            name="password"
-          />
-          <input
-            value={this.state.confirmPassword}
+            name="password" placeholder="******************"/>
+          </div>
+          <div className="mb-6">
+            <label className="block text-grey-darker text-sm font-bold mb-2" htmlFor="password">
+              Confirm Password
+            </label>
+            <input className="shadow rounded w-full py-2 px-3 text-grey-darker mb-3" value={this.state.confirmPassword}
             onChange={this.handleChange}
             type="password"
-            name="confirmPassword"
-          />
-        <button
-          block
-          bsSize="large"
-          disabled={!this.validateForm()}
-          type="submit"
-        >Sign Up </button>
+            name="confirmPassword" placeholder="******************"/>
+          </div>
+          <div className="flex items-center justify-between">
+              <button className="bg-blue hover:bg-blue-dark text-black font-bold py-2 px-4 rounded"
+              disabled={!this.validateForm()}
+              type="submit">
+              Sign Up
+              </button>
+          </div>
+        </div>
       </form>
     );
   }
