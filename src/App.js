@@ -1,15 +1,29 @@
 import React from 'react'
 import './App.css'
-import Header from './components/Header'
-import { BrowserRouter, Route, Link } from 'react-router-dom'
+import Nav from './components/Nav'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import API from './adapters/API'
+import Home from './components/Home'
 import Signup from './components/Signup'
-import Login from './components/Login'
 
 class App extends React.Component {
 
+<<<<<<< HEAD
+=======
+  state = {
+    token: null,
+    projectsData: []
+  }
+
+>>>>>>> dev
   componentDidMount () {
     API.createSubscription()
+    const token = localStorage.getItem('token')
+    if (token) this.setState({ token: token});
+
+    if (token)
+      API.getAllProjects(token)
+        .then(projectsData => this.setState({ projectsData }));
   }
 
   newUser = (user) => {
@@ -19,12 +33,22 @@ class App extends React.Component {
 
   loginUser = (user) => {
     API.login(user)
-    .then(console.log)
+      .then(data => {
+        const token = localStorage.setItem('token', data.jwt)
+        this.setState({
+          token: token
+        })
+      })
   }
 
+  token = localStorage.getItem('token')
+
   render () {
+    const { token, projectsData } = this.state
+
     return (
       <div className='App'>
+<<<<<<< HEAD
         <BrowserRouter>
           <>
           <Header />
@@ -32,6 +56,19 @@ class App extends React.Component {
           <Route path='/login' component={Login} />
           </>
         </BrowserRouter>
+=======
+        <Router>
+          <Nav />
+          <Route exact path="/" render={ () => <Home
+                login={ this.loginUser }
+                projects={ projectsData.projects }
+                collaborators={ projectsData.collaborators }
+              />
+             }
+          />
+          <Route exact path="/signup" component={Signup} />
+        </Router>
+>>>>>>> dev
       </div>
     )
   }

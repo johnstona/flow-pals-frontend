@@ -7,14 +7,27 @@ const PROJECTS_URL = `${BASE_URL}/projects`
 const COLLABORATORS_URL = `${BASE_URL}/collaborators`
 const LOGIN_URL = `${BASE_URL}/login`
 
+const fetchOpts = (token) => {
+  return {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`
+    }
+  }
+}
+
 const createSubscription = () => {
   ACTION_CABLE.subscriptions.create('ProjectChannel', {
-    received: data => { console.log(data) }
+    received: data => {
+      console.log(data)
+    }
   })
 }
 
-const getAllProjects = () => {
-  return fetch(PROJECTS_URL)
+const getAllProjects = token => {
+  return fetch(PROJECTS_URL, fetchOpts(token))
     .then(resp => resp.json())
 }
 
@@ -29,8 +42,9 @@ const login = (user) => {
       user: {
         username: user.username,
         password: user.password
-      } })
-  })
+      }
+    })
+  }).then(res => res.json())
 }
 
 export const getAllUsers = () => {
@@ -84,6 +98,7 @@ const createCollaborator = (user_id, project_id) => {
 
 export default {
   getAllUsers,
+  getAllProjects,
   createUser,
   login,
   createSubscription

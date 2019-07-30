@@ -1,9 +1,10 @@
 import React from 'react';
+import API from '../adapters/API';
 
 class Login extends React.Component {
   state = {
     username: '',
-    password: ''
+    password: '',
   }
 
   validateForm() {
@@ -30,6 +31,7 @@ class Login extends React.Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <form onSubmit={this.handleSubmit}>
         <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
           <div class="mb-4">
@@ -37,6 +39,11 @@ class Login extends React.Component {
               Username
             </label>
             <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" type="text"
+=======
+      <form onSubmit={this.handleSubmit} className="flex">
+          <input
+            type="text"
+>>>>>>> dev
             value={this.state.username}
             onChange={this.handleChange}
             name="username"
@@ -49,6 +56,7 @@ class Login extends React.Component {
             <input class="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3" value={this.state.password}
             onChange={this.handleChange}
             type="password"
+<<<<<<< HEAD
             name="password" placeholder="******************"/>
           </div>
           <div class="flex items-center justify-between">
@@ -58,6 +66,14 @@ class Login extends React.Component {
               </button>
           </div>
         </div>
+=======
+            name="password"
+          />
+        <button
+          disabled={!this.validateForm()}
+          type="submit"
+        >Log In</button>
+>>>>>>> dev
       </form>
     );
   }
