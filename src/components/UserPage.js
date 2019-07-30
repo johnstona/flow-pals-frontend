@@ -8,6 +8,7 @@ const UserPage = ({ projects }) => {
   return (
     <Container>
       <Sidebar>
+        <ProjectList projects={ projects }/>
       </Sidebar>
       <Project />
     </Container>

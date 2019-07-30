@@ -3,7 +3,7 @@ import './Sidebar.css'
 
 const Sidebar = ({ children }) => {
   return (
-    <div className="sidebar flex d-column">
+    <div className="sidebar flex d-column mr-8">
       { children }
     </div>
   )
