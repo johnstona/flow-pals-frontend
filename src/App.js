@@ -45,6 +45,22 @@ class App extends React.Component {
     this.setState({ currentProject })
   }
 
+  newProject = () => {
+    let token = this.state.token
+    API.createProject(token)
+      .then(currentProject => { API.getAllProjects(token)
+        .then(projectsData => this.setState({ currentProject, projectsData }))
+        }
+      )
+
+  }
+
+  saveProject = (id, name, content) => {
+    // params => token, id, name, content
+    API.updateProject(this.state.token, id, name, content)
+      .then(currentProject => this.setState({ currentProject }))
+  }
+
   token = localStorage.getItem('token')
 
   render () {
@@ -61,6 +77,8 @@ class App extends React.Component {
                 project={ currentProject }
                 projects={ projectsData.projects }
                 collaborators={ projectsData.collaborators }
+                newProject={ this.newProject }
+                saveProject={ this.saveProject }
               />
              }
           />

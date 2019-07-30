@@ -1,1 +1,11 @@
+.project-list__add-btn {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  margin-top: 2em;
+}
 
+.add_btn__img {
+  width: 100%;
+  height: auto;
+}

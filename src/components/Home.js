@@ -7,7 +7,7 @@ import Login from './Login/Login'
 
 const token = localStorage.getItem('token')
 
-const Home = ({ login, displayProject, projects, collaborators, project  }) => {
+const Home = ({ login, displayProject, projects, collaborators, project, saveProject, newProject  }) => {
   return (
     token !== ""
     ? <UserPage
@@ -15,6 +15,8 @@ const Home = ({ login, displayProject, projects, collaborators, project  }) => {
         collaborators={ collaborators }
         displayProject={ displayProject }
         project={ project }
+        saveProject={ saveProject }
+        newProject={ newProject }
       />
     : <Login login={ login }/>
   )

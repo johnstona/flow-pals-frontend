@@ -73,14 +73,38 @@ export const createUser = (user) => {
   }).then(resp => resp.json())
 }
 
-const createProject = (project) => {
-  return fetch(USERS_URL, {
+const createProject = (token) => {
+  return fetch(PROJECTS_URL, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
     },
-    body: JSON.stringify(project)
+    body: JSON.stringify({
+      project: {
+        name: '',
+        content: ''
+      }
+    })
   }).then(resp => resp.json())
+}
+
+const updateProject = (token, id, name, content) => {
+  return fetch(`${PROJECTS_URL}/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({
+      project: {
+        id: id,
+        name: name,
+        content: content
+      }
+    })
+  }).then(res => res.json())
 }
 
 const createCollaborator = (user_id, project_id) => {
@@ -99,6 +123,8 @@ const createCollaborator = (user_id, project_id) => {
 export default {
   getAllUsers,
   getAllProjects,
+  createProject,
+  updateProject,
   createUser,
   login,
   createSubscription
