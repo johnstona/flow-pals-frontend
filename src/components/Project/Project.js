@@ -42,6 +42,13 @@ const Project = ({ project, collaborators, saveProject }) => {
 
   const editFlowElement = () => {
     return
+    setName(e.target.value)
+  }
+
+  useEffect(() => {saveProject(project.id, name, content)}, [content, name, project.id, saveProject])
+
+  const handleProjectChange = e => {
+    setContent(e.target.innerHTML)
   }
 
 
@@ -50,9 +57,9 @@ const Project = ({ project, collaborators, saveProject }) => {
       <input class="project__title font-bold"
         data-id="h1"
         onChange={handleHeaderChange}
-        value={ project.name }
+        value={ name }
       />
-    <div class="project bg-gray-100" data-id="project" ref={projectContainer}>
+    <div class="project bg-gray-100" data-id="project" ref={projectContainer} onChange={handleProjectChange}>>
         { project.content }
       </div>
       <div className="project__controls">
