@@ -28,9 +28,6 @@ class App extends React.Component {
         <BrowserRouter>
           <>
           <Header />
-          <Route exact path='/' component={App} />
-          <Route exact path='/signup' render={Signup} />
-          <Route exact path='/login' render={Login} />
           </>
         </BrowserRouter>
       </div>
