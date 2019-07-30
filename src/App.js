@@ -7,6 +7,7 @@ import Signup from './components/Signup'
 import Login from './components/Login'
 
 class App extends React.Component {
+  
   componentDidMount () {
 
     API.createSubscription()
