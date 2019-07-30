@@ -5,17 +5,15 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import API from './adapters/API'
 import Home from './components/Home'
 import Signup from './components/Signup'
+import Login from './components/Login'
 
 class App extends React.Component {
 
-<<<<<<< HEAD
-=======
   state = {
     token: null,
     projectsData: []
   }
 
->>>>>>> dev
   componentDidMount () {
     API.createSubscription()
     const token = localStorage.getItem('token')
@@ -48,15 +46,6 @@ class App extends React.Component {
 
     return (
       <div className='App'>
-<<<<<<< HEAD
-        <BrowserRouter>
-          <>
-          <Header />
-          <Route path='/signup' component={Signup} />
-          <Route path='/login' component={Login} />
-          </>
-        </BrowserRouter>
-=======
         <Router>
           <Nav />
           <Route exact path="/" render={ () => <Home
@@ -67,8 +56,8 @@ class App extends React.Component {
              }
           />
           <Route exact path="/signup" component={Signup} />
+          <Route exact path="/login" component={Login} />
         </Router>
->>>>>>> dev
       </div>
     )
   }
