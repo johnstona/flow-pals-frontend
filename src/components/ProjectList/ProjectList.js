@@ -6,9 +6,9 @@ const ProjectList = ({ projects, displayProject, collaborators, newProject }) =>
     return (
       <ul className="project-list text-center">
         { projects
-            ? projects.map(project =>
-              <li
-                  className="project-list__item shadow bg-teal-200 ls-2 p-2 rounded mb-4"
+            ? projects.map((project,i) =>
+              <li key={i}
+                  className="project-list__item bg-teal-200 ls-2 p-2 rounded mb-4 cursor-pointer"
                   onClick={ () => displayProject(project) }
                   >
                   { project.name }
