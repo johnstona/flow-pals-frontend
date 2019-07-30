@@ -35,28 +35,28 @@ class Login extends React.Component {
     return (
       <Container center={true}>
         <form className="self-center login-form" onSubmit={this.handleSubmit}>
-          <div class="bg-teal-300 shadow-lg rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
-            <div class="mb-4">
-              <label class="block text-grey-darker text-sm font-bold mb-2" for="username">
+          <div className="bg-teal-300 shadow-lg rounded px-8 pt-6 pb-8 mb-4 flex flex-col">
+            <div className="mb-4">
+              <label className="block text-grey-darker text-sm font-bold mb-2" for="username">
                 Username
               </label>
-              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" type="text"
+              <input className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker" type="text"
               value={this.state.username}
               onChange={this.handleChange}
               name="username"
               placeholder="Username"/>
             </div>
-            <div class="mb-6">
-              <label class="block text-grey-darker text-sm font-bold mb-2" for="password">
+            <div className="mb-6">
+              <label className="block text-grey-darker text-sm font-bold mb-2" for="password">
                 Password
               </label>
-              <input class="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3" value={this.state.password}
+              <input className="shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3" value={this.state.password}
               onChange={this.handleChange}
               type="password"
               name="password" placeholder="******************"/>
             </div>
-            <div class="flex items-center justify-between">
-                <button class="bg-blue hover:bg-blue-dark text-black font-bold py-2 px-4 rounded"
+            <div className="flex items-center justify-between">
+                <button className="bg-blue hover:bg-blue-dark text-black font-bold py-2 px-4 rounded"
                 type="submit">
                 Sign In
                 </button>
