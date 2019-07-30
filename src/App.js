@@ -1,8 +1,9 @@
 import React from 'react'
 import './App.css'
-import Nav from './components/Nav'
+import './index.css'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import API from './adapters/API'
+import Nav from './components/Nav/Nav'
 import Home from './components/Home'
 import Signup from './components/Signup'
 import Login from './components/Login'
@@ -48,7 +49,8 @@ class App extends React.Component {
       <div className='App'>
         <Router>
           <Nav />
-          <Route exact path="/" render={ () => <Home
+          <Route exact path="/" render={ () =>
+              <Home
                 login={ this.loginUser }
                 projects={ projectsData.projects }
                 collaborators={ projectsData.collaborators }
