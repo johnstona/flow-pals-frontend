@@ -7508,20 +7508,6 @@ video {
   z-index: auto;
 }
 
-.project-wrapper {
-  width: 100%;
-  height: 100%;
-  background: white;
-  overflow: scroll;
-  margin: 0 auto;
-}
-
-.project {
-  border: solid 1px #a0aec0;
-  height: 100%;
-  width: 50%;
-}
-
 @media (min-width: 640px) {
   .sm\:appearance-none {
     -webkit-appearance: none;

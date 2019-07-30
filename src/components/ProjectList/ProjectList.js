@@ -4,10 +4,10 @@ import './ProjectList.css'
 
 const ProjectList = ({ projects }) => {
     return (
-      <ul className="flex project-list text-center">
+      <ul className="project-list text-center">
         { projects
             ? projects.map( project =>
-            <li className="project-list__item ls-2">{ project.name }</li> )
+            <li className="project-list__item shadow bg-teal-200 ls-2 p-2 rounded">{ project.name }</li> )
             : ''
 
         }

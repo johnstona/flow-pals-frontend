@@ -1,0 +1,6 @@
+.login-form {
+  flex-basis: 400px;
+  flex-shrink: 1;
+  flex-grow: 30vw;
+  height: auto;
+}
