@@ -1,11 +1,12 @@
 import React from 'react'
 import './Project.css'
 
-const Project = ({ children }) => {
+const Project = ({ project }) => {
   return (
     <div className="project-wrapper">
+      <h1>{ project.name }</h1>
       <div class="project">
-        { children }
+        { project.content }
       </div>
     </div>
   )

@@ -12,7 +12,8 @@ class App extends React.Component {
 
   state = {
     token: null,
-    projectsData: []
+    projectsData: [],
+    currentProject: {}
   }
 
   componentDidMount () {
@@ -40,10 +41,14 @@ class App extends React.Component {
       })
   }
 
+  displayProject = currentProject => {
+    this.setState({ currentProject })
+  }
+
   token = localStorage.getItem('token')
 
   render () {
-    const { token, projectsData } = this.state
+    const { token, projectsData, currentProject } = this.state
 
     return (
       <div className='App'>
@@ -52,6 +57,8 @@ class App extends React.Component {
           <Route exact path="/" render={ () =>
               <Home
                 login={ this.loginUser }
+                displayProject={ this.displayProject }
+                project={ currentProject }
                 projects={ projectsData.projects }
                 collaborators={ projectsData.collaborators }
               />
