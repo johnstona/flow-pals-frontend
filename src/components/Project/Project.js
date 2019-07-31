@@ -10,8 +10,9 @@ class Project extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: '',
-      content: ''
+      id: props.project.id,
+      name: props.project.name,
+      content: props.project.content
     }
 
     this.projectContainer = React.createRef();
@@ -23,8 +24,15 @@ class Project extends React.Component {
 
   handleNameChange = (e) => {
     this.setState({name: e.target.value})
-    this.props.updateProject(this.props.project, this.state.name, this.state.content)
-    this.props.saveProject(this.props.project.id, this.state.name, this.state.content)
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.id !== this.state.id) {
+      this.setState({
+        name: this.props.project.name,
+        content: this.props.project.content
+      })
+    }
   }
 
   addFlowElement = () => {
@@ -41,9 +49,14 @@ class Project extends React.Component {
 
       const flow = document.querySelectorAll('.flow-box')
       flow.forEach(box => {
-        box.addEventListener('click', this.handleProjectChange, true)
+        box.addEventListener('mousedown', this.handleProjectChange, false)
       })
     }
+
+  updateProject() {
+    this.props.updateProject(this.props.project, this.state.name, this.state.content)
+    this.props.saveProject(this.props.project.id, this.state.name, this.projectContainer.current.innerHTML)
+  }
 
   render() {
     return (
@@ -51,13 +64,14 @@ class Project extends React.Component {
       <input class="project__title font-bold"
         data-id="h1"
         onChange={this.handleNameChange}
-        value={ this.state.name }
+        value={ (!this.state.name ? this.props.project.name : this.state.name) }
       />
-    <div class="project bg-gray-100" data-id="project" ref={this.projectContainer} onChange={this.handleProjectChange}>
+    <div class="project bg-gray-100" data-id="project" ref={this.projectContainer} onInput={this.handleProjectChange}>
         { this.state.content }
       </div>
       <div className="project__controls">
         <button onClick={() => this.addFlowElement()} className="font-bold text-white bg-pink-300 border-b-4 border-pink-400 rounded p-2 mt-2 mr-2">ADD ELEMENT</button>
+      <button onClick={() => this.updateProject()} className="font-bold text-white bg-pink-300 border-b-4 border-pink-400 rounded p-2 mt-2 mr-2">SAVE PROJECT</button>
       </div>
     </div>
   )}

@@ -10,7 +10,7 @@ const ProjectList = ({ projects, displayProject, collaborators, newProject }) =>
               <li key={i}
                   className="project-list__item bg-teal-200 ls-2 p-2 rounded mb-4 cursor-pointer"
                   onClick={ () => displayProject(project.id) }
-                  >
+              >
                   { project.name }
               </li>
             )
