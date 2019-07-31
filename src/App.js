@@ -55,18 +55,20 @@ class App extends React.Component {
   createSubscription = () => {
     API.ACTION_CABLE.subscriptions.create('ProjectChannel', {
       received: data => {
-        this.updateProjectActionCable(data)
+        this.updateProjectOrCollaboratorActionCable(data)
       }
     })
   }
 
-  updateProjectActionCable = (newProject) => {
+  updateProjectOrCollaboratorActionCable = (data) => {
+    if (data.name) {
     let newProjectArray = this.state.projects
-    let index = this.state.projects.findIndex(project => project.id === newProject.id)
-    newProjectArray[index] = newProject
+    let index = this.state.projects.findIndex(project => project.id === data.id)
+    newProjectArray[index] = data
     this.setState({
       projects: newProjectArray
-    })
+    })}
+    else this.setState({collaborators: [...this.state.collaborators, data]})
   }
 
   displayProject = id => {
