@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import './index.css'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom"
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom"
 import API from './adapters/API'
 import Nav from './components/Nav/Nav'
 import Home from './components/Home'
@@ -49,21 +49,31 @@ class App extends React.Component {
       })
   }
 
+  logoutUser = () => {
+    const token = localStorage.setItem('token', '')
+        this.setState({
+          token: token
+        })
+    window.location.reload()
+  }
+
   createSubscription = () => {
     API.ACTION_CABLE.subscriptions.create('ProjectChannel', {
       received: data => {
-        this.updateProjectActionCable(data)
+        this.updateProjectOrCollaboratorActionCable(data)
       }
     })
   }
 
-  updateProjectActionCable = (newProject) => {
+  updateProjectOrCollaboratorActionCable = (data) => {
+    if (data.name) {
     let newProjectArray = this.state.projects
-    let index = this.state.projects.findIndex(project => project.id === newProject.id)
-    newProjectArray[index] = newProject
+    let index = this.state.projects.findIndex(project => project.id === data.id)
+    newProjectArray[index] = data
     this.setState({
       projects: newProjectArray
-    })
+    })}
+    else this.setState({collaborators: [...this.state.collaborators, data]})
   }
 
   displayProject = id => {
@@ -106,10 +116,11 @@ class App extends React.Component {
     return (
       <div className='App'>
         <Router>
-          <Nav />
+          <Nav logout={ this.logoutUser }/>
           <Route exact path="/" render={ () =>
               <Home
                 login={ this.loginUser }
+                logout={ this.logoutUser }
                 displayProject={ this.displayProject }
                 project={ currentProject }
                 projects={ projects }
@@ -121,8 +132,8 @@ class App extends React.Component {
               />
              }
           />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" render={ () => <Signup newUser={this.newUser}/> } />
+          <Route exact path="/login" render={ () => <Login login={this.loginUser} /> }  />
         </Router>
       </div>
     )

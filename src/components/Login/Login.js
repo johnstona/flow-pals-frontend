@@ -1,6 +1,7 @@
 import React from 'react';
 import API from '../../adapters/API';
 import Container from '../Container/Container'
+import { Redirect } from "react-router-dom"
 import './Login.css'
 
 class Login extends React.Component {
