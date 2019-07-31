@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import './index.css'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom"
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom"
 import API from './adapters/API'
 import Nav from './components/Nav/Nav'
 import Home from './components/Home'
@@ -42,6 +42,14 @@ class App extends React.Component {
           token: token
         })
       })
+  }
+
+  logoutUser = () => {
+    const token = localStorage.setItem('token', '')
+        this.setState({
+          token: token
+        })
+    window.location.reload()
   }
 
   createSubscription = () => {
@@ -101,10 +109,11 @@ class App extends React.Component {
     return (
       <div className='App'>
         <Router>
-          <Nav />
+          <Nav logout={ this.logoutUser }/>
           <Route exact path="/" render={ () =>
               <Home
                 login={ this.loginUser }
+                logout={ this.logoutUser }
                 displayProject={ this.displayProject }
                 project={ currentProject }
                 projects={ projects }
