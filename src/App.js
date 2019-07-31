@@ -116,8 +116,8 @@ class App extends React.Component {
               />
              }
           />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" render={ () => <Signup newUser={this.newUser}/> } />
+          <Route exact path="/login" render={ () => <Login login={this.loginUser} /> }  />
         </Router>
       </div>
     )

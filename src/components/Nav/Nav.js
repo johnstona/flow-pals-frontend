@@ -9,7 +9,7 @@ const links = () => {
     return (
       <>
         <li className="mr-6 text-blue-500"><NavLink to="/">Home</NavLink></li>
-        <li className="mr-6 text-blue-500"><NavLink to="/Logout">Logout</NavLink></li>
+        <li className="mr-6 text-blue-500"><NavLink to="/logout">Logout</NavLink></li>
       </>
     )
 
@@ -19,6 +19,7 @@ const links = () => {
       <>
         <li className="mr-6 text-blue-500"><NavLink to="/">Home</NavLink></li>
         <li className="mr-6 text-blue-500"><NavLink to="/signup">Signup</NavLink></li>
+        <li className="mr-6 text-blue-500"><NavLink to="/login">Login</NavLink></li>
       </>
     )
 }
