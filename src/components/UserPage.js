@@ -4,7 +4,7 @@ import Project from './Project/Project'
 import Sidebar from './Sidebar/Sidebar'
 import ProjectList from './ProjectList/ProjectList'
 
-const UserPage = ({ projects, displayProject, project, collaborators, saveProject, newProject, updateSingleProject }) => {
+const UserPage = ({ projects, displayProject, project, collaborators, saveProject, newProject, updateSingleProject, users }) => {
   return (
     <Container>
       <Sidebar>
@@ -19,6 +19,7 @@ const UserPage = ({ projects, displayProject, project, collaborators, saveProjec
         collaborators={collaborators}
         saveProject={saveProject}
         updateProject={updateSingleProject}
+        users={users}
       />
     </Container>
   )

@@ -13,7 +13,8 @@ class App extends React.Component {
   state = {
     token: null,
     projectsData: [],
-    currentProject: {}
+    currentProject: {},
+    allUsers: []
   }
 
   componentDidMount () {
@@ -21,12 +22,16 @@ class App extends React.Component {
     const token = localStorage.getItem('token')
     if (token) this.setState({ token: token});
 
-    if (token)
+    if (token) {
       API.getAllProjects(token)
         .then(projectsData => this.setState({
           projects: projectsData.projects,
           collaborators: projectsData.collaborators
         }));
+
+      API.getAllUsers(token)
+        .then(allUsers => this.setState({ allUsers }))
+    }
   }
 
   newUser = (user) => {
@@ -112,6 +117,7 @@ class App extends React.Component {
                 newProject={ this.newProject }
                 saveProject={ this.saveProject }
                 updateSingleProject={this.updateSingleProject}
+                users={ this.state.allUsers }
               />
              }
           />

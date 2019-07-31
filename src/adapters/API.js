@@ -47,9 +47,15 @@ const login = (user) => {
   }).then(res => res.json())
 }
 
-export const getAllUsers = () => {
-  return fetch(USERS_URL)
-    .then(resp => resp.json())
+const getAllUsers = (token) => {
+   return fetch(`http://localhost:3000/users`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`
+    }
+  }).then(res => res.json())
 }
 
 const getAllCollaborators = () => {
@@ -125,6 +131,7 @@ export default {
   getAllProjects,
   createProject,
   updateProject,
+  createCollaborator,
   createUser,
   login,
   createSubscription,

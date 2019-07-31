@@ -6,7 +6,7 @@
   margin: 0 auto;
   display: grid;
   grid-template-columns: 80% 10%;
-  grid-template-rows: 2em 80vh 1fr;
+  grid-template-rows: 2em 80vh 1fr 20vw;
   grid-gap: 1em;
 }
 

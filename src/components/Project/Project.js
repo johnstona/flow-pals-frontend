@@ -3,8 +3,8 @@ import './Project.css'
 import '../../script.js'
 import {TweenMax, Power2, TimelineLite} from "gsap/TweenMax"// Both at the same time
 import Draggable from "gsap/Draggable"
-import { updateExpression } from '@babel/types';
-
+import { updateExpression } from '@babel/types'
+import CollaboratorSearch from '../CollaboratorSearch'
 
 class Project extends React.Component {
   constructor(props) {
@@ -18,47 +18,57 @@ class Project extends React.Component {
     this.projectContainer = React.createRef();
   }
 
-  handleProjectChange = (e) => {
-    this.setState({content: e.target.innerHTML})
-  }
+  // handleProjectChange = (e) => {
+  //   this.setState({content: e.target.innerHTML})
+  // }
 
   handleNameChange = (e) => {
     this.setState({name: e.target.value})
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.id !== this.state.id) {
+    if (prevProps.project.id !== prevState.id) {
       this.setState({
+        id: this.props.project.id,
         name: this.props.project.name,
         content: this.props.project.content
       })
     }
+    return null
   }
 
   addFlowElement = () => {
-    const el = `
-        <div class="drag shadow bg-white flow-box rounded p-2 text-white ls-2" contenteditable="true">
-          <p class="p-4 bg-blue-300" contenteditable="true">
-            type your text here
-          </p>
-        </div>
+    let num = Math.floor(Math.random() * 100)
+    let id = `drag-${num}`;
+
+    let el = `
+      <div class="drag shadow bg-white flow-box rounded text-white p-2 ls-2">
+        <div class="drag-tab p-2 bg-white"></div>
+      <div class="p-4 bg-blue-300" type="text" contenteditable="true" data-clickable='true' ></div>
+      </div>
       `
 
       this.projectContainer.current.innerHTML += el
-      Draggable.create(".drag")
 
-      const flow = document.querySelectorAll('.flow-box')
-      flow.forEach(box => {
-        box.addEventListener('mousedown', this.handleProjectChange, false)
-      })
-    }
+      Draggable.create('.drag', {
+        dragClickables: false
+      });
+  }
 
   updateProject() {
     this.props.updateProject(this.props.project, this.state.name, this.state.content)
     this.props.saveProject(this.props.project.id, this.state.name, this.projectContainer.current.innerHTML)
   }
 
+  projectMarkup() {
+    return {__html: this.state.content};
+  }
+
   render() {
+    Draggable.create('.drag', {
+      dragClickables: false
+    });
+
     return (
     <div className="project-wrapper">
       <input class="project__title font-bold"
@@ -66,13 +76,17 @@ class Project extends React.Component {
         onChange={this.handleNameChange}
         value={ (!this.state.name ? this.props.project.name : this.state.name) }
       />
-    <div class="project bg-gray-100" data-id="project" ref={this.projectContainer} onInput={this.handleProjectChange}>
-        { this.state.content }
-      </div>
+    <div
+      class="project bg-gray-100"
+      data-id="project"
+      ref={this.projectContainer}
+      dangerouslySetInnerHTML={{__html: this.state.content}}
+    />
       <div className="project__controls">
         <button onClick={() => this.addFlowElement()} className="font-bold text-white bg-pink-300 border-b-4 border-pink-400 rounded p-2 mt-2 mr-2">ADD ELEMENT</button>
       <button onClick={() => this.updateProject()} className="font-bold text-white bg-pink-300 border-b-4 border-pink-400 rounded p-2 mt-2 mr-2">SAVE PROJECT</button>
       </div>
+      <CollaboratorSearch collaborators={ this.props.collaborators } users={this.props.users}/>
     </div>
   )}
 }
