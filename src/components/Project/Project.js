@@ -23,8 +23,6 @@ class Project extends React.Component {
 
   handleNameChange = (e) => {
     this.setState({name: e.target.value})
-    this.props.updateProject(this.props.project, this.state.name, this.state.content)
-    this.props.saveProject(this.props.project.id, this.state.name, this.state.content)
   }
 
   addFlowElement = () => {
@@ -45,6 +43,11 @@ class Project extends React.Component {
       })
     }
 
+  updateProject() {
+    this.props.updateProject(this.props.project, this.state.name, this.state.content)
+    this.props.saveProject(this.props.project.id, this.state.name, this.state.content)
+  }
+
   render() {
     return (
     <div className="project-wrapper">
@@ -58,6 +61,7 @@ class Project extends React.Component {
       </div>
       <div className="project__controls">
         <button onClick={() => this.addFlowElement()} className="font-bold text-white bg-pink-300 border-b-4 border-pink-400 rounded p-2 mt-2 mr-2">ADD ELEMENT</button>
+      <button onClick={() => this.updateProject()} className="font-bold text-white bg-pink-300 border-b-4 border-pink-400 rounded p-2 mt-2 mr-2">SAVE PROJECT</button>
       </div>
     </div>
   )}

@@ -23,9 +23,9 @@ class App extends React.Component {
 
     if (token)
       API.getAllProjects(token)
-        .then(projectsData => this.setState({ 
+        .then(projectsData => this.setState({
           projects: projectsData.projects,
-          collaborators: projectsData.collaborators 
+          collaborators: projectsData.collaborators
         }));
   }
 
@@ -58,7 +58,6 @@ class App extends React.Component {
     this.setState({
       projects: newProjectArray
     })
-
   }
 
   newProject = () => {
