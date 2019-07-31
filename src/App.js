@@ -17,7 +17,7 @@ class App extends React.Component {
   }
 
   componentDidMount () {
-    API.createSubscription()
+    this.createSubscription()
     const token = localStorage.getItem('token')
     if (token) this.setState({ token: token});
 
@@ -42,6 +42,23 @@ class App extends React.Component {
           token: token
         })
       })
+  }
+
+  createSubscription = () => {
+    API.ACTION_CABLE.subscriptions.create('ProjectChannel', {
+      received: data => {
+        this.updateProjectActionCable(data)
+      }
+    })
+  }
+
+  updateProjectActionCable = (newProject) => {
+    let newProjectArray = this.state.projects
+    let index = this.state.projects.findIndex(project => project.id === newProject.id)
+    newProjectArray[index] = newProject
+    this.setState({
+      projects: newProjectArray
+    })
   }
 
   displayProject = id => {
