@@ -23,7 +23,10 @@ class App extends React.Component {
 
     if (token)
       API.getAllProjects(token)
-        .then(projectsData => this.setState({ projectsData }));
+        .then(projectsData => this.setState({ 
+          projects: projectsData.projects,
+          collaborators: projectsData.collaborators 
+        }));
   }
 
   newUser = (user) => {
@@ -41,8 +44,21 @@ class App extends React.Component {
       })
   }
 
-  displayProject = currentProject => {
+  displayProject = id => {
+    let currentProject = this.state.projects.find(project => project.id === id)
     this.setState({ currentProject })
+  }
+
+  updateSingleProject = (newProject, name, content) => {
+    let newProjectArray = this.state.projects
+    let index = this.state.projects.findIndex(project => project.id === newProject.id)
+    newProject.name = name
+    newProject.content = content
+    newProjectArray[index] = newProject
+    this.setState({
+      projects: newProjectArray
+    })
+
   }
 
   newProject = () => {
@@ -64,7 +80,7 @@ class App extends React.Component {
   token = localStorage.getItem('token')
 
   render () {
-    const { token, projectsData, currentProject } = this.state
+    const { token, projects, collaborators, currentProject } = this.state
 
     return (
       <div className='App'>
@@ -75,10 +91,11 @@ class App extends React.Component {
                 login={ this.loginUser }
                 displayProject={ this.displayProject }
                 project={ currentProject }
-                projects={ projectsData.projects }
-                collaborators={ projectsData.collaborators }
+                projects={ projects }
+                collaborators={ collaborators }
                 newProject={ this.newProject }
                 saveProject={ this.saveProject }
+                updateSingleProject={this.updateSingleProject}
               />
              }
           />

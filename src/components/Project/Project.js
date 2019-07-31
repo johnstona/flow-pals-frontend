@@ -3,8 +3,9 @@ import './Project.css'
 import '../../script.js'
 import {TweenMax, Power2, TimelineLite} from "gsap/TweenMax"// Both at the same time
 import Draggable from "gsap/Draggable"
+import { updateExpression } from '@babel/types';
 
-const Project = ({ project, collaborators, saveProject }) => {
+const Project = ({ project, collaborators, saveProject, updateProject }) => {
 
   const [content, setContent] = useState(project.content)
   const [name, setName] = useState(project.name)
@@ -13,14 +14,17 @@ const Project = ({ project, collaborators, saveProject }) => {
   let timer
 
   const handleHeaderChange = e => {
-    clearInterval(timer)
-    timer = setTimeout(saveProject(project.id, e.target.value, content), 500)
+
+    setName(e.target.value)
+    updateProject(project, name, content)
+    // clearInterval(timer)
+    // timer = setTimeout(saveProject(project.id, e.target.value, content), 500)
   }
 
-  const handleProjectChange = () => {
-    const val = projectContainer.current.innerHTML;
-    saveProject(project.id, name, projectContainer.current.innerHTML)
-  }
+  // const handleProjectChange = () => {
+  //   const val = projectContainer.current.innerHTML;
+  //   saveProject(project.id, name, projectContainer.current.innerHTML)
+  // }
 
   const addFlowElement = () => {
   const el = `
@@ -40,9 +44,8 @@ const Project = ({ project, collaborators, saveProject }) => {
     })
   }
 
-  const editFlowElement = () => {
-    return
-    setName(e.target.value)
+  const editFlowElement = (e) => {
+    return setName(e.target.value)
   }
 
   useEffect(() => {saveProject(project.id, name, content)}, [content, name, project.id, saveProject])
@@ -57,7 +60,7 @@ const Project = ({ project, collaborators, saveProject }) => {
       <input class="project__title font-bold"
         data-id="h1"
         onChange={handleHeaderChange}
-        value={ name }
+        value={ project.name }
       />
     <div class="project bg-gray-100" data-id="project" ref={projectContainer} onChange={handleProjectChange}>>
         { project.content }

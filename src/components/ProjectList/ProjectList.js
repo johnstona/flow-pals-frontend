@@ -6,10 +6,10 @@ const ProjectList = ({ projects, displayProject, collaborators, newProject }) =>
     return (
       <ul className="project-list text-center">
         { projects
-            ? projects.map((project,i) =>
+            ? projects.map((project, i) =>
               <li key={i}
                   className="project-list__item bg-teal-200 ls-2 p-2 rounded mb-4 cursor-pointer"
-                  onClick={ () => displayProject(project) }
+                  onClick={ () => displayProject(project.id) }
                   >
                   { project.name }
               </li>
