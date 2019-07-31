@@ -127,5 +127,6 @@ export default {
   updateProject,
   createUser,
   login,
-  createSubscription
+  createSubscription,
+  ACTION_CABLE
 }
